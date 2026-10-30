@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ef">
+  <meta name="description" content="認識呂珍妮：優雅、幽默、喜歡貓咪，也永遠為朋友留一份溫柔。">
+  <title>嗨，我是珍妮 — 個人介紹</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f4ef;
+      --ink: #29251f;
+      --muted: #716b63;
+      --accent: #bd735f;
+      --line: rgba(41, 37, 31, .14);
+      --serif: "Iowan Old Style", "Noto Serif TC", "Songti TC", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    /* 導覽列讓訪客快速瀏覽各段介紹；手機版會切換成可操作的選單。 */
+    .site-header {
+      position: absolute;
+      z-index: 5;
+      inset: 0 0 auto;
+      color: #fff;
+    }
+    .nav-wrap {
+      width: min(1280px, calc(100% - 64px));
+      min-height: 82px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.28);
+    }
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 19px;
+      text-decoration: none;
+      letter-spacing: .08em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links a {
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: #fff; }
+    .menu-toggle {
+      display: none;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: transparent;
+      color: #fff;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* 首屏以個人照片和一句自我定位建立第一印象。 */
+    .hero {
+      position: relative;
+      min-height: min(800px, 100svh);
+      min-height: max(680px, min(800px, 100svh));
+      overflow: hidden;
+      display: grid;
+      align-items: end;
+      color: #fff;
+      background: #433c38;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+    }
+    .hero::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, rgba(22,20,19,.78) 0%, rgba(22,20,19,.39) 48%, rgba(22,20,19,.08) 100%),
+        linear-gradient(0deg, rgba(22,20,19,.40), transparent 46%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 180px 0 96px;
+    }
+    .eyebrow {
+      margin: 0 0 21px;
+      color: #e7c7b9;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 {
+      max-width: 720px;
+      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: clamp(56px, 9vw, 112px);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: 1.08;
+    }
+    .hero-copy {
+      max-width: 480px;
+      margin-bottom: 34px;
+      color: rgba(255,255,255,.86);
+      font-size: clamp(15px, 1.5vw, 18px);
+      line-height: 1.9;
+    }
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.75);
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-decoration: none;
+    }
+    .hero-link span { font-size: 18px; transition: transform .2s ease; }
+    .hero-link:hover span { transform: translateX(4px); }
+    .hero-index {
+      position: absolute;
+      right: max(24px, calc((100% - 1120px) / 2));
+      bottom: 40px;
+      z-index: 1;
+      color: rgba(255,255,255,.76);
+      font-size: 11px;
+      letter-spacing: .15em;
+    }
+
+    /* 關於我用短段落交代基本個性，保留原始介紹的俏皮語氣。 */
+    .intro-section { padding: 132px 0 140px; }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: clamp(42px, 10vw, 140px);
+      align-items: start;
+    }
+    .section-label {
+      margin-bottom: 22px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .intro-title, .section-title {
+      margin-bottom: 0;
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.24;
+    }
+    .intro-copy {
+      padding-top: 5px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2.05;
+    }
+    .intro-copy p:last-child { margin-bottom: 0; }
+    .signature {
+      margin-top: 26px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 24px;
+      font-style: italic;
+    }
+
+    /* 個人小檔案把星座、血型和 MBTI 整理成一眼可讀的資訊卡。 */
+    .profile-section { padding: 0 0 136px; }
+    .profile-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+    .profile-heading .section-title { font-size: clamp(34px, 4vw, 48px); }
+    .profile-note { margin: 0 0 5px; color: var(--muted); font-size: 13px; }
+    .profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .profile-card {
+      min-height: 190px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: rgba(255,255,255,.35);
+    }
+    .profile-card span {
+      display: block;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .15em;
+    }
+    .profile-card strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 500;
+      letter-spacing: -.03em;
+    }
+
+    /* 反差日常以文字卡片呈現外在氣質、朋友模式和貓咪雷達。 */
+    .moments-section {
+      padding: 112px 0 120px;
+      background: #e9e3da;
+    }
+    .moments-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 48px;
+    }
+    .moments-top .section-title { max-width: 600px; }
+    .moments-aside {
+      max-width: 260px;
+      margin: 0 0 7px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .moments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .moment-card {
+      min-height: 270px;
+      padding: 28px;
+      border-top: 1px solid rgba(41,37,31,.35);
+    }
+    .moment-number {
+      display: block;
+      margin-bottom: 52px;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+    }
+    .moment-card h3 {
+      margin-bottom: 12px;
+      font-family: var(--serif);
+      font-size: 27px;
+      font-weight: 500;
+    }
+    .moment-card p { margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.9; }
+
+    /* 收尾用一句話總結珍妮對朋友的溫柔，並提供回到頁首的連結。 */
+    .closing {
+      padding: 120px 24px 126px;
+      text-align: center;
+    }
+    .closing .section-label { margin-bottom: 24px; }
+    .closing blockquote {
+      max-width: 800px;
+      margin: 0 auto 28px;
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 60px);
+      letter-spacing: -.035em;
+      line-height: 1.45;
+    }
+    .closing p { margin-bottom: 28px; color: var(--muted); font-size: 14px; }
+    .back-top {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    .back-top:hover { background: var(--ink); color: #fff; }
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px max(24px, calc((100% - 1120px) / 2));
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* 進場效果只在使用者未要求減少動態時啟用。 */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+      .reveal.is-visible { opacity: 1; transform: none; }
+    }
+
+    /* 小螢幕改成單欄版面，導覽按鈕可用鍵盤與螢幕閱讀器操作。 */
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 40px, 520px); }
+      .nav-wrap { width: calc(100% - 40px); min-height: 70px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        left: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 18px;
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 6px;
+        background: rgba(35,31,29,.96);
+      }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { padding: 13px 2px; }
+      .nav-links a + a { border-top: 1px solid rgba(255,255,255,.14); }
+      .hero { min-height: 760px; min-height: max(680px, 100svh); }
+      .hero-photo { object-position: 57% center; }
+      .hero::after { background: linear-gradient(0deg, rgba(22,20,19,.76), rgba(22,20,19,.04) 88%); }
+      .hero-content { width: calc(100% - 40px); padding: 120px 0 98px; }
+      .hero h1 { font-size: clamp(54px, 16vw, 82px); }
+      .hero-index { right: 20px; bottom: 26px; }
+      .intro-section { padding: 86px 0 92px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 28px; }
+      .intro-copy { font-size: 15px; }
+      .profile-section { padding-bottom: 88px; }
+      .profile-heading, .moments-top { align-items: start; flex-direction: column; }
+      .profile-note { margin: 0; }
+      .profile-grid { grid-template-columns: 1fr; gap: 10px; }
+      .profile-card { min-height: 0; padding: 22px 24px; }
+      .profile-card span { margin-bottom: 14px; }
+      .profile-card strong { font-size: 30px; }
+      .moments-section { padding: 82px 0 80px; }
+      .moments-top { margin-bottom: 26px; }
+      .moments-aside { margin-top: -14px; }
+      .moments-grid { grid-template-columns: 1fr; gap: 4px; }
+      .moment-card { min-height: 0; padding: 24px 4px 28px; }
+      .moment-number { margin-bottom: 22px; }
+      .closing { padding: 88px 24px 92px; }
+      .site-footer { flex-direction: column; padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav-wrap" aria-label="主要導覽">
+      <a class="wordmark" href="#top">珍妮・小檔案</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">選單</button>
+      <div class="nav-links" id="site-menu">
+        <a href="#about">關於我</a>
+        <a href="#profile">基本資料</a>
+        <a href="#moments">我的日常</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-photo" src="自己的照片.jpg" alt="珍妮在教室裡比出手勢的自拍照">
+      <div class="hero-content">
+        <p class="eyebrow">A LITTLE INTRODUCTION · 01</p>
+        <h1 id="hero-title">嗨，我是<br>呂珍妮。</h1>
+        <p class="hero-copy">初見是氣質美少女，熟了之後——<br>嘴賤、貓奴、偶爾幼稚，但對朋友絕對真心。</p>
+        <a class="hero-link" href="#about">往下認識我 <span aria-hidden="true">↓</span></a>
+      </div>
+      <span class="hero-index" aria-hidden="true">TAICHUNG · 2026</span>
+    </section>
+
+    <section class="intro-section" id="about" aria-labelledby="about-title">
+      <div class="wrap intro-grid reveal">
+        <div>
+          <p class="section-label">01 / 關於我</p>
+          <h2 class="intro-title" id="about-title">優雅是第一印象，<br>可愛是意外日常。</h2>
+        </div>
+        <div class="intro-copy">
+          <p>大家好，我是呂珍妮，今年 19 歲。外人眼裡的我落落大方、文質彬彬；但一進入朋友模式，嘴賤指數就會直接點滿。</p>
+          <p>走在路上遇到小貓咪，我會瞬間變成 19 個月大的寶寶，忍不住開始大叫。平常上課偶爾搗麻糬、滑手機玩糞 Game，不過考試倒是常常能順利過關。</p>
+          <p>我可能嘴巴有點欠，但對朋友可是體貼又暖心。只要你需要，我都會認真替你加油、陪你一起面對。</p>
+          <p class="signature">— 珍妮</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-section" id="profile" aria-labelledby="profile-title">
+      <div class="wrap reveal">
+        <div class="profile-heading">
+          <div>
+            <p class="section-label">02 / 基本資料</p>
+            <h2 class="section-title" id="profile-title">認識我的關鍵字</h2>
+          </div>
+          <p class="profile-note">三個小資訊，快速認識珍妮。</p>
+        </div>
+        <div class="profile-grid">
+          <article class="profile-card">
+            <span>STAR SIGN</span>
+            <strong>牡羊座</strong>
+          </article>
+          <article class="profile-card">
+            <span>BLOOD TYPE</span>
+            <strong>B 型</strong>
+          </article>
+          <article class="profile-card">
+            <span>PERSONALITY</span>
+            <strong>INFJ</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="moments-section" id="moments" aria-labelledby="moments-title">
+      <div class="wrap reveal">
+        <div class="moments-top">
+          <div>
+            <p class="section-label">03 / 我的日常</p>
+            <h2 class="section-title" id="moments-title">反差感，是我的日常。</h2>
+          </div>
+          <p class="moments-aside">優雅、毒舌、貓奴、學霸，還有一點精靈系的自信——這些都是真實的我。</p>
+        </div>
+        <div class="moments-grid">
+          <article class="moment-card">
+            <span class="moment-number">01</span>
+            <h3>貓咪雷達全開</h3>
+            <p>路上只要出現小貓咪，理智就會短暫離線，秒變興奮寶寶。</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">02</span>
+            <h3>朋友模式啟動</h3>
+            <p>嘴上可能不饒人，但朋友需要的時候，我一定暖心力挺。</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">03</span>
+            <h3>看似隨性，其實可靠</h3>
+            <p>上課有我的小日常，考試也能好好過關，關鍵時刻還是很可以。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing reveal" aria-labelledby="closing-title">
+      <p class="section-label">THAT'S ME</p>
+      <blockquote id="closing-title">「嘴巴欠扁是真的，<br>對朋友好也是真的。」</blockquote>
+      <p>既迷人又暖心，很高興認識你。</p>
+      <a class="back-top" href="#top">回到最上面 ↑</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>呂珍妮・個人介紹</span>
+    <span>本網站為個人介紹作品，內容依本人自我介紹整理。</span>
+  </footer>
+
+  <script>
+    // 手機版導覽按鈕同步更新展開狀態，並在選取項目後收起選單。
+    const menuButton = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('#site-menu');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menu.classList.toggle('is-open', !isOpen);
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('is-open');
+      });
+    });
+
+    // 觀察內容區塊進入畫面的時機，減少持續監聽捲動事件的負擔。
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
+    } else {
+      document.querySelectorAll('.reveal').forEach((section) => section.classList.add('is-visible'));
+    }
+  </script>
+</body>
+</html>
